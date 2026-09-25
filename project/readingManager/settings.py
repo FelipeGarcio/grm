@@ -41,7 +41,16 @@ INSTALLED_APPS = [
     'theme',
 ]
 
+# django-tailwind in standalone mode: the Tailwind CLI binary is downloaded by
+# pytailwindcss, no Node.js/npm needed. Pinned so every machine builds the same CSS.
 TAILWIND_APP_NAME = "theme"
+TAILWIND_USE_STANDALONE_BINARY = True
+TAILWIND_STANDALONE_BINARY_VERSION = "v4.3.0"
+# Tailwind v4's plain --watch exits when stdin closes (IDE runners, background
+# jobs), and honcho then stops runserver with it. =always keeps it alive.
+TAILWIND_STANDALONE_START_COMMAND_ARGS = (
+    "-i static_src/src/styles.css -o static/css/dist/styles.css --watch=always"
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +61,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Reload the browser when templates or the generated CSS change (dev only).
+if DEBUG:
+    INSTALLED_APPS += ['django_browser_reload']
+    MIDDLEWARE += ['django_browser_reload.middleware.BrowserReloadMiddleware']
 
 ROOT_URLCONF = 'readingManager.urls'
 
