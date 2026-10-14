@@ -23,7 +23,7 @@
         {% for book in books %}
             <section class="flex flex-col h-96 w-64 bg-yellow-500 place-items-center rounded-4xl">
                 <img class="mt-6 h-30 w-22" src="https://picsum.photos/200/300"></img>
-                <h2 class="mt-2 font-bold text-xl">{% book.title %}</h2>
+                <h2 class="mt-2 font-bold text-xl">{{ book.title }}</h2>
             </section>
         {% endfor %}
     </div>  
