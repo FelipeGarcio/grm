@@ -1,17 +1,26 @@
-{% if books %}  
-    <div class="grid grid-cols-[repeat(auto-fill,16rem)] gap-6 bg-gray-500 min-h-dvh min-w-screen">
-        {% for book in books %}
-            <section class="flex flex-col h-96 w-64 bg-yellow-500 place-items-center rounded-4xl">
-                <img class="mt-6 h-30 w-22" src="https://picsum.photos/200/300"></img>
-                <h2 class="mt-2 font-bold text-xl">{{ book.title }}</h2>
+{% if books %}
+<div class="grid min-h-dvh grid-cols-[repeat(auto-fit,16rem)] content-start justify-center gap-6 p-6">        
+    {% for book in books %}
+            <section class="flex h-86 flex-col items-center rounded-4xl bg-gray-400 border-2 border-gray-600">
+            {% if book.cover %}
+                <img src="{{ book.cover.url }}" alt="Capa de {{ book.title }}">
+            {% endif %}                
+            <h2 class="mt-2 px-4 text-center text-xl font-bold">{{ book.title }}</h2>
             </section>
-        {% endfor %}
-    {% else %}
-    <div class="flex flex-col gap-6 bg-gray-500 min-h-dvh min-w-screen">
-        <div class="flex flex-row justify-center items-center">
-            <section>
-                <h2 class="text-4xl mt-8">Voce ainda nao adicionou nenhum livro.</h2>
-            </section>
-        </div>
-    </div>  
+    {% endfor %}
+</div>
+{% else %}
+    <div class="flex min-h-dvh flex-col items-center">
+        <h2 class="mt-8 text-4xl">Você ainda não adicionou nenhum livro.</h2>
+        <a href="#" class="mt-10 flex h-96 w-64 flex-col items-center rounded-4xl bg-gray-400 transition-transform duration-100 hover:scale-105">
+            <img class="mt-6 h-30 w-22 object-cover" src="https://picsum.photos/200/300" alt="">
+            <span class="mt-2 px-4 text-center text-base font-bold">Clique aqui para adicionar seu primeiro livro</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="mt-10" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5z"/>
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+            </svg>
+        </a>
+
+    </div>
+
 {% endif %}
