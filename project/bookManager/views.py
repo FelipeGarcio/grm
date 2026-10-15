@@ -8,8 +8,5 @@ from django.views import View
 
 class HomeView(View):
     def get(self, request):
-        books = [
-            {"title": "title_1","description": "one description"},
-            {"title": "title_2","description": "Two description"},
-        ]
+        books = None
         return render(request, template_name="base.html", context={"books": books})

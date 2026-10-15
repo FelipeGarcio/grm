@@ -9,24 +9,20 @@
         {% tailwind_css %}
     </head>
 
-    <body class="bg-gray-900 text-black font-semibold">
-    <div id="top" class="container">
-        <div class="flex justify-start h-32 min-w-screen bg-gray-800">
-            <ul class="flex flex-row space-x-16 text-bold text-xl">
+    <body class="bg-gray-900 text-gray-200 font-semibold">
+    <div>
+        <div class="flex justify-between h-32 min-w-screen bg-indigo-500">
+            <ul id="top-menu" class="flex flex-row space-x-24 text-bold text-xl ml-8 items-center">
                 <li href="#">Biblioteca</li>
                 <li href="#">Social</li>
-                <li href="#">Perfil</li>
                 <li href="#">livros com desconto</li>
             </ul>
+            <div class="flex flex-row justify-center space-x-4 items-center hover:bg-linear-to-r from-indigo-500 to-sky-500 rounded-2xl">
+                <a class="text-2xl font-thin" href="#">*nome do user*</a>
+                <img src="https://picsum.photos/120/120" alt="" class="mr-8">
+            </div>
         </div>
-    <div class="grid grid-cols-[repeat(auto-fill,16rem)] gap-6 bg-gray-500 min-h-dvh min-w-screen">
-        {% for book in books %}
-            <section class="flex flex-col h-96 w-64 bg-yellow-500 place-items-center rounded-4xl">
-                <img class="mt-6 h-30 w-22" src="https://picsum.photos/200/300"></img>
-                <h2 class="mt-2 font-bold text-xl">{{ book.title }}</h2>
-            </section>
-        {% endfor %}
-    </div>  
+        {% include "book_item.html" %}
     </div>
     </body>
     </html>

@@ -1,0 +1,17 @@
+{% if books %}  
+    <div class="grid grid-cols-[repeat(auto-fill,16rem)] gap-6 bg-gray-500 min-h-dvh min-w-screen">
+        {% for book in books %}
+            <section class="flex flex-col h-96 w-64 bg-yellow-500 place-items-center rounded-4xl">
+                <img class="mt-6 h-30 w-22" src="https://picsum.photos/200/300"></img>
+                <h2 class="mt-2 font-bold text-xl">{{ book.title }}</h2>
+            </section>
+        {% endfor %}
+    {% else %}
+    <div class="flex flex-col gap-6 bg-gray-500 min-h-dvh min-w-screen">
+        <div class="flex flex-row justify-center items-center">
+            <section>
+                <h2 class="text-4xl mt-8">Voce ainda nao adicionou nenhum livro.</h2>
+            </section>
+        </div>
+    </div>  
+{% endif %}
