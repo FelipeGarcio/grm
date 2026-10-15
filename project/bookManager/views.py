@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
+from bookManager.models import Book, Author
 
-# Create your views here.
-# def home(request):
-#     return render(request, template_name="base.html")
 
 class HomeView(View):
     def get(self, request):
-        books = None
+        books = [
+            {"title": "titulo 1", "cover": None, "authors": [{"name": "author 1"}]}]
+
+        # books = None
         return render(request, template_name="base.html", context={"books": books})
+
+class AuthorDetailView(View):
+    def get(self, request):
+        return HttpResponse("Authors detail page")

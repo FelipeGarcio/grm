@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tailwind',
     'theme',
+    'bookManager',
 ]
 
 # django-tailwind in standalone mode: the Tailwind CLI binary is downloaded by
