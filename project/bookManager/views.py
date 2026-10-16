@@ -2,9 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from bookManager.models import Book, Author
+from bookManager.forms import BookForm, AuthorForm\
+from django.shortcuts import get_object_or_404
 
 
 class HomeView(View):
+    """ Class based view for the main/root page of the project.
+    only has GET method with a mock book list.
+    """
     def get(self, request):
         books = [{"title": "titulo 1", "cover": None, "authors": [{"name": "author 2"}]},
                  {"title": "titulo 2", "cover": None, "authors": [{"name": "author 4"}]},
@@ -17,18 +22,24 @@ class HomeView(View):
 
 
 class AuthorDetailView(View):
-    def get(self, request):
+    def get(self, request, slug):
         return HttpResponse("Authors detail page")
 
 
 class BookDetailView(View):
-    def get(self, request):
-        return render(request, template_name="book_page.html")
+    def get(self, request, book_id):
+        book = get_object_or_404(Book, book_id=book_id)
+        return render(request, template_name="book_page.html", context={"book": book})
 
 
 class AddBookView(View):
+    """Class based view with GET and POST methods, `GET` renders the template
+    and POST receive and validate the book data.
+    """
     def get(self, request):
-        return render(request, template_name="add_book_page.html")
+        form = BookForm()
+        return render(request, template_name="add_book_page.html", context={"form": form})
 
     def post(self, request):
+        form = BookForm(request.POST, request.FILES)
         return render(request, template_name="add_book_page.html")
